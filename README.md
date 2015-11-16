@@ -1,4 +1,4 @@
-# net-dnd
+# net-dnd [![Build Status](https://travis-ci.org/dartmouth-dltg/net-dnd.svg?branch=master)](https://travis-ci.org/dartmouth-dltg/net-dnd)
 
 Net::DND is a Ruby library for performing user finding (aka. lookup) operations on a Dartmouth Name Directory (DND) server. Inspired by the net-ssh library, net-dnd uses a familiar block construct for starting and interacting with a DND session/connection.
 
