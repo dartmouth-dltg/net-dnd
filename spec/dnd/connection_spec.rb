@@ -3,18 +3,17 @@ require 'net/dnd/connection'
 
 module Net ; module DND
 
-  describe "a good socket", :shared => true do
+  shared_context "a good socket" do 
     before(:each) do
       @socket = flexmock("TCP Socket")
       @tcp = flexmock(TCPSocket)
       @response = flexmock(Response)
-    end
+     end
   end
 
   describe Connection, "to a bad host" do
-
-    it_should_behave_like "a good socket"
-
+    include_context "a good socket"
+    
     before(:each) do
       @tcp.should_receive(:open).and_raise(Errno::ECONNREFUSED, "Connection refused")
       @connection = Connection.new('my.fakehost.com')
@@ -31,7 +30,7 @@ module Net ; module DND
 
   describe Connection, "to a busy/slow host" do
 
-    it_should_behave_like "a good socket"
+    include_context "a good socket"
 
     before(:each) do
       flexmock(Timeout).should_receive(:timeout).and_raise(Timeout::Error, "Connection timed out")
@@ -49,7 +48,7 @@ module Net ; module DND
 
   describe Connection, "to a good host" do
 
-    it_should_behave_like "a good socket"
+    include_context "a good socket"
 
     before(:each) do
       @tcp.should_receive(:open).once.and_return(@socket)
@@ -70,22 +69,26 @@ module Net ; module DND
 
       it "should send the correct command when fields is called with empty field list" do
         @socket.should_receive(:puts).once.with('fields')
+        @socket.should_receive(:closed?).and_return(false)
         @connection.fields
       end
 
       it "should send the correct command when fields is called with a field list" do
         @socket.should_receive(:puts).once.with('fields name nickname')
+        @socket.should_receive(:closed?).and_return(false)
         @connection.fields(['name', 'nickname'])
       end
 
       it "should send the correct command when lookup is called" do
         @socket.should_receive(:puts).once.with('lookup joe user,name nickname')
+        @socket.should_receive(:closed?).and_return(false)
         @connection.lookup('joe user', ['name', 'nickname'])
       end
 
       it "should send the correct command when quit is called" do
         @socket.should_receive(:puts).once.with('quit')
         @socket.should_receive(:close)
+        @socket.should_receive(:closed?).and_return(false)
         @connection.quit
       end
     end

@@ -48,7 +48,7 @@ module Net ; module DND
     end
   end
 
-  describe "a connected session", :shared => true do
+  shared_context "a connected session" do
     before(:each) do
       @connection = flexmock("Good Connection")
       @connection.should_receive(:open?).twice.and_return(true)
@@ -56,7 +56,7 @@ module Net ; module DND
     end
   end
 
-  describe "a good response", :shared => true do
+  shared_context "a good response" do 
     before(:each) do
       @response = flexmock(Response)
       @connection.should_receive(:send).once.and_return(@response)
@@ -67,7 +67,7 @@ module Net ; module DND
 
   describe Session, "when setting fields with an unknown field" do
 
-    it_should_behave_like "a connected session"
+    include_context "a connected session"
 
     before(:each) do
       @response = flexmock(Response)
@@ -86,8 +86,8 @@ module Net ; module DND
 
   describe Session, "when setting fields with a bad field_list" do
 
-    it_should_behave_like "a connected session"
-    it_should_behave_like "a good response"
+    include_context "a connected session"
+    include_context "a good response"
 
     before(:each) do
       @field_list = ['ssn']
@@ -107,8 +107,8 @@ module Net ; module DND
 
   describe Session, "when setting fields with a good field_list" do
 
-    it_should_behave_like "a connected session"
-    it_should_behave_like "a good response"
+    include_context "a connected session"
+    include_context "a good response"
 
     before(:each) do
       name_field = flexmock("a name field")
@@ -127,7 +127,8 @@ module Net ; module DND
     end
   end
 
-  describe "mock items for a started session", :shared => true do
+  shared_context "mock items for a started session" do
+#  describe "mock items for a started session", :shared => true do
     before(:each) do
       name_field = flexmock("a name field")
       name_field.should_receive(:read_all?).once.and_return(true)
@@ -146,7 +147,7 @@ module Net ; module DND
 
   describe Session, "performing a find with no profiles returned" do
 
-    it_should_behave_like "mock items for a started session"
+    include_context "mock items for a started session"
 
     before(:each) do
       @find_resp = flexmock(Response)
@@ -165,7 +166,7 @@ module Net ; module DND
 
   describe Session, "performing a find with one profile returned" do
 
-    it_should_behave_like "mock items for a started session"
+    include_context "mock items for a started session"
 
     before(:each) do
       @find_resp = flexmock(Response)
@@ -189,7 +190,7 @@ module Net ; module DND
 
   describe Session, "performing a find with multiple profiles returned" do
 
-    it_should_behave_like "mock items for a started session"
+    include_context "mock items for a started session"
 
     before(:each) do
       @joe = flexmock("Joe's Profile")
@@ -215,7 +216,7 @@ module Net ; module DND
 
   describe Session, "performing an bad single find" do
 
-    it_should_behave_like "mock items for a started session"
+    include_context "mock items for a started session"
 
     before(:each) do
       @find_resp = flexmock(Response)
@@ -233,7 +234,7 @@ module Net ; module DND
 
   describe Session, "performing a good single find" do
 
-    it_should_behave_like "mock items for a started session"
+    include_context "mock items for a started session"
 
     before(:each) do
       @find_resp = flexmock(Response)

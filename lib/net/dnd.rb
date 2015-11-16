@@ -71,12 +71,4 @@ module Net
     
   end
   
-  module HitchcockDND
-    
-    HOST = 'dnd.hitchcock.org'
-    def self.start(fields=[], &block)
-      DND.start(HOST, fields, &block)
-    end
-    
-  end
 end
