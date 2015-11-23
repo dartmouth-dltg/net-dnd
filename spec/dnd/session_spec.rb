@@ -13,7 +13,7 @@ module Net ; module DND
     end
 
     it "should raise a Connection Error" do
-      lambda { Session.new('my.badhost.com') }.should raise_error(ConnectionError)
+      expect { Session.new('my.badhost.com') }.to raise_error(ConnectionError)
     end
   end
 
@@ -27,7 +27,7 @@ module Net ; module DND
     end
 
     it do
-      @session.should be_open
+      expect(@session).to be_open
     end
   end
 
@@ -44,7 +44,7 @@ module Net ; module DND
     end
 
     it "should not be open" do
-      @session.should_not be_open
+      expect(@session).not_to be_open
     end
   end
 
@@ -79,8 +79,7 @@ module Net ; module DND
     end
 
     it "should raise a Field Not Found error" do
-      lambda { @session.set_fields(@field_list) }.
-        should raise_error(FieldNotFound, "unknown.")
+      expect { @session.set_fields(@field_list) }.to raise_error(FieldNotFound, "unknown.")
     end
   end
 
@@ -100,8 +99,8 @@ module Net ; module DND
     end
 
     it "should raise a Field Access Denied error" do
-      lambda { @session.set_fields(@field_list) }.
-        should raise_error(FieldAccessDenied, "#{@field_list[0]} is not world readable.")
+      expect { @session.set_fields(@field_list) }.
+	  		 to raise_error(FieldAccessDenied, "#{@field_list[0]} is not world readable.")
     end
   end
 
@@ -123,7 +122,7 @@ module Net ; module DND
     end
 
     it "should have [:name, :nickname] as the fields attribute" do
-      @session.fields.should == [:name, :nickname]
+      expect(@session.fields).to eq [:name, :nickname]
     end
   end
 
@@ -159,7 +158,7 @@ module Net ; module DND
     end
 
     it "should return an empty array" do
-      @profiles.should == []
+      expect(@profiles).to eq []
     end
 
   end
@@ -180,11 +179,11 @@ module Net ; module DND
     end
 
     it "should return a single item array of profiles" do
-      @profiles.length.should == 1
+      expect(@profiles.length).to eq 1
     end
 
     it "should return Joe's profile as the first item" do
-      @profiles[0].should equal(@joe)
+      expect(@profiles[0]).to equal(@joe)
     end
   end
 
@@ -206,11 +205,11 @@ module Net ; module DND
     end
 
     it "should return a 2 item array of profiles" do
-      @profiles.length.should == 2
+      expect(@profiles.length).to eq 2
     end
 
     it "should return Jane's profile as the second item" do
-      @profiles[1].should equal(@jane)
+      expect(@profiles[1]).to equal(@jane)
     end
   end
 
@@ -228,7 +227,7 @@ module Net ; module DND
     end
 
     it "should return nil for the profile object" do
-      @profile.should be_nil
+      expect(@profile).to be_nil
     end
   end
 
@@ -248,7 +247,7 @@ module Net ; module DND
     end
 
     it "should return Joe's profile" do
-      @profile.should equal(@joe)
+      expect(@profile).to equal(@joe)
     end
   end
 

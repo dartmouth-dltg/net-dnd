@@ -12,35 +12,35 @@ module Net ; module DND
     end
 
     it "should return the correct object" do
-      @profile.should be_instance_of(Profile)
+      expect(@profile).to be_instance_of(Profile)
     end
 
     it "should return the correct inspection string" do
-      @profile.inspect.should match(/<Net::DND::Profile length=4, .*deptclass="Student".*>/)
+      expect(@profile.inspect).to match(/<Net::DND::Profile length=4, .*deptclass="Student".*>/)
     end
 
     it "should have the correct number of entries" do
-      @profile.length.should == 4
+      expect(@profile.length).to eq 4
     end
 
     it "should return the correct name" do
-      @profile.name.should == @items[0]
+      expect(@profile.name).to eq @items[0]
     end
 
     it "should return the correct email" do
-      @profile[:email].should == @items[3]
+      expect(@profile[:email]).to eq @items[3]
     end
 
     it "should contain nickname field" do
-      @profile.should be_nickname
+      expect(@profile).to be_nickname
     end
 
     it "should not contain did field" do
-      @profile.should_not be_did
+      expect(@profile).not_to be_did
     end
 
     it "should raise Field Not Found error if did field is requested" do
-      lambda { @profile.did }.should raise_error(FieldNotFound)
+      expect { @profile.did }.to raise_error(FieldNotFound)
     end
 
   end
@@ -54,11 +54,11 @@ module Net ; module DND
     end
 
     it "should have a valid expire_date" do
-      @profile.expires_on.should_not be_nil
+      expect(@profile.expires_on).not_to be_nil
     end
 
     it "should be expired" do
-      @profile.should be_expired
+      expect(@profile).to be_expired
     end
 
   end
