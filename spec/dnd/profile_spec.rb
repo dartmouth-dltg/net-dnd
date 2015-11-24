@@ -32,11 +32,11 @@ module Net ; module DND
     end
 
     it "should contain nickname field" do
-      expect(@profile).to be_nickname
+      expect(@profile.respond_to? :nickname?).to be true
     end
 
     it "should not contain did field" do
-      expect(@profile).not_to be_did
+      expect(@profile.respond_to? :dnd?).to be false
     end
 
     it "should raise Field Not Found error if did field is requested" do
