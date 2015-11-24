@@ -44,6 +44,14 @@ module Net
       def [](field)
         return_field(field)
       end
+	  
+      # If method is not defined, response_to? will use this method to return whether or not
+      # the key is available (true or false).
+
+      def respond_to_missing?(method, *)
+        method_str = method.to_s
+        @profile.has_key?(method_str.chop.to_sym) if method_str[-1, 1] == '?'
+      end
 
       private
 
@@ -54,8 +62,7 @@ module Net
       # the named field in Profile instance.
 
       def method_missing(method_id)
-        attrib_name = method_id.to_s
-        return @profile.has_key?(attrib_name.chop.to_sym) if attrib_name[-1, 1] == '?'
+        return true if respond_to_missing?(method_id)
         return_field(method_id)
       end
 
