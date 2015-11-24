@@ -10,37 +10,37 @@ module Net ; module DND
     end
     
     it "should properly set the writeable flag" do
-      @field.writeable.should == @write
+      expect(@field.writeable).to eq @write
     end
     
     it "should properly set the readable flag" do
-      @field.readable.should == @read
+      expect(@field.readable).to eq @read
     end
     
     it "should report as readable by all if readable value is 'A'" do
-      @field.should be_read_all
+      expect(@field).to be_read_all
     end
     
     it "should report back the proper name" do
-      @field.name.should == @name
+      expect(@field.name).to eq @name
     end
     
     it "should report back the proper inspection string" do
-      @field.inspect.should match(/<Net::DND::Field name=".*" writeable="[AUNT]" readable="[AUNT]">/)
+      expect(@field.inspect).to match(/<Net::DND::Field name=".*" writeable="[AUNT]" readable="[AUNT]">/)
     end
     
     it "should return the name when coerced to a string" do
-      @field.to_s.should == @name
+      expect(@field.to_s).to eq @name
     end
     
     it "should return :name when coerced to a symbol" do
-      @field.to_sym.should == @name.to_sym
+      expect(@field.to_sym).to eq @name.to_sym
     end
     
     it "should not report as readable by all if readable value is not 'A'" do
       @read = "T"
       @field = Field.new(@name, @write, @read)
-      @field.should_not be_read_all
+      expect(@field).not_to be_read_all
     end
     
   end
@@ -54,18 +54,18 @@ module Net ; module DND
     end
 
     it "should have the correct name" do
-      @field.name.should == @values[0]
+      expect(@field.name).to eq @values[0]
     end
 
     it "should have to correct readable value" do
-      @field.readable.should == @values[2]
+      expect(@field.readable).to eq @values[2]
     end
   end
   
   describe Field, "created using from_field_line with an improper line format" do
     it "should raise the proper error" do
       line = "This is a bad field line"
-      lambda { Field.from_field_line(line) }.should raise_error(FieldLineInvalid)
+      expect { Field.from_field_line(line) }.to raise_error(FieldLineInvalid)
     end
   end
   

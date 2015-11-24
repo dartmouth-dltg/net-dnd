@@ -20,11 +20,11 @@ module Net ; module DND
     end
 
     it "should not indicate an open connection" do
-      @connection.should_not be_open
+      expect(@connection).not_to be_open
     end
 
     it "should return the 'Could not connect' error message" do
-      @connection.error.should match(/^Could not connect to/)
+      expect(@connection.error).to match(/^Could not connect to/)
     end
   end
 
@@ -38,11 +38,11 @@ module Net ; module DND
     end
 
     it "should not indicate an open connection" do
-      @connection.should_not be_open
+      expect(@connection).not_to be_open
     end
 
     it "should return the 'Connection timed out' error message" do
-      @connection.error.should match(/^Connection attempt .* has timed out/)
+      expect(@connection.error).to match(/^Connection attempt .* has timed out/)
     end
   end
 
@@ -58,11 +58,11 @@ module Net ; module DND
     end
 
     it "should indicate an open connection" do
-      @connection.should be_open
+      expect(@connection).to be_open
     end
 
     it "should not have any error messages" do
-      @connection.error.should be_nil
+      expect(@connection.error).to be_nil
     end
 
     describe "sending commands" do

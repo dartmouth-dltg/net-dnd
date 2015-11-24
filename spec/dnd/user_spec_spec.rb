@@ -10,11 +10,11 @@ module Net ; module DND
     end
     
     it "should report a specifier type of :name" do
-      @spec.type.should == :name
+      expect(@spec.type).to eq :name
     end
     
     it "should return just the supplied specifier when coerced to a string" do
-      @spec.to_s.should == @name
+      expect(@spec.to_s).to eq @name
     end
   end
     
@@ -25,15 +25,15 @@ module Net ; module DND
     end
     
     it "should report a specifier type of :uid" do
-      @spec.type.should == :uid
+      expect(@spec.type).to eq :uid
     end
     
     it "should return the specifier, with leading \"#\", when coerced to a string" do
-      @spec.to_s.should == "##{@uid}"
+      expect(@spec.to_s).to eq "##{@uid}"
     end
 
     it "should return the correct inspection string" do
-      @spec.inspect.should match(/<Net::DND::UserSpec specifier="\d+" type=\:.+>/)
+      expect(@spec.inspect).to match(/<Net::DND::UserSpec specifier="\d+" type=\:.+>/)
     end
   end
     
@@ -44,11 +44,11 @@ module Net ; module DND
     end
     
     it "should report a specifier type of :did" do
-      @spec.type.should == :did
+      expect(@spec.type).to eq :did
     end
     
     it "should return the specifier, with leading \"#*\", when coerced to a string" do
-      @spec.to_s.should == "#*#{@did}"
+      expect(@spec.to_s).to eq "#*#{@did}"
     end
   end
     
@@ -59,11 +59,11 @@ module Net ; module DND
     end
     
     it "should report a specifier type of :did" do
-      @spec.type.should == :did
+      expect(@spec.type).to eq :did
     end
     
     it "should return the specifier, with leading \"#*\", when coerced to a string" do
-      @spec.to_s.should == "#*#{@did}"
+      expect(@spec.to_s).to eq "#*#{@did}"
     end
   end
   
