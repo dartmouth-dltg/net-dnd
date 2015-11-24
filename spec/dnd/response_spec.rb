@@ -10,15 +10,15 @@ module Net ; module DND
     end
 
     it "should have no :code value" do
-      @response.code.should be_nil
+      expect(@response.code).to be_nil
     end
 
     it "should have no :error value" do
-      @response.error.should be_nil
+      expect(@response.error).to be_nil
     end
 
     it "should have an empty :items value" do
-      @response.items.should be_empty
+      expect(@response.items).to be_empty
     end
   end
 
@@ -31,11 +31,11 @@ module Net ; module DND
     end
 
     it "should have a :code of 220" do
-      @response.code.should == 220
+      expect(@response.code).to eq 220
     end
 
     it do
-      @response.should be_ok
+      expect(@response).to be_ok
     end
   end
 
@@ -50,15 +50,15 @@ module Net ; module DND
     end
 
     it "should return a code of 501" do
-      @response.code == @code
+      expect(@response.code).to eq @code
     end
 
     it "should have the appropriate error message" do
-      @response.error == @msg
+      expect(@response.error).to eq @msg
     end
 
     it do
-      @response.should_not be_ok
+      expect(@response).to_not be_ok
     end
   end
 
@@ -73,11 +73,11 @@ module Net ; module DND
     end
 
     it "should return a code of 200" do
-      @response.code == @code
+      expect(@response.code).to eq @code
     end
 
     it do
-      @response.should be_ok
+      expect(@response).to be_ok
     end
   end
 
@@ -96,23 +96,23 @@ module Net ; module DND
     end
 
     it "should have a sub_count of 0" do
-      @response.sub_count == 0
+      expect(@response.sub_count).to eq 0
     end
 
     it "should have the correct number of items" do
-      @response.should have(2).items
+      expect(@response.items.size).to eq 2
     end
 
     it "should have 'nickname' as the second item" do
-      @response.items[1].split[0] == 'nickname'
+      expect(@response.items[1].split[0]).to eq 'nickname'
     end
 
     it "should have a code of 200" do
-      @response.code.should == @code[1]
+      expect(@response.code).to eq @code[1]
     end
 
     it do
-      @response.should be_ok
+      expect(@response).to be_ok
     end
   end
 
@@ -134,27 +134,27 @@ module Net ; module DND
     end
   
     it "should have the correct count" do
-      @response.count == @count
+      expect(@response.count).to eq @count
     end
   
     it "should have the correct sub_count" do
-      @response.sub_count == @sub_count
+      expect(@response.sub_count).to eq @sub_count
     end
   
     it "should have items stored as an array of arrays" do
-      @response.items[0].should be_an_instance_of(Array)
+      expect(@response.items[0]).to be_an_instance_of(Array)
     end
   
     it "should have the correct name for the sub-array of the second item" do
-      @response.items[1][0] == 'Jane P. User'
+      expect(@response.items[1][0]).to eq 'Jane P. User'
     end
   
     it "should have a code of 201" do
-      @response.code.should == @code[1]
+      expect(@response.code).to eq @code[1]
     end
   
     it do
-      @response.should be_ok
+      expect(@response).to be_ok
     end
   end
 
