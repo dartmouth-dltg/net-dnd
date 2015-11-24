@@ -127,7 +127,6 @@ module Net ; module DND
   end
 
   shared_context "mock items for a started session" do
-#  describe "mock items for a started session", :shared => true do
     before(:each) do
       name_field = flexmock("a name field")
       name_field.should_receive(:read_all?).once.and_return(true)
